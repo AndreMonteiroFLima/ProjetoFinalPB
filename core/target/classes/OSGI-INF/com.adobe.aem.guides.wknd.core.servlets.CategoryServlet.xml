@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.wknd.core.servlets.CategoryServlet" immediate="true">
+  <property name="service.description" type="String" value="Category Service All"/>
+  <property name="sling.servlet.methods" type="String">POST
+GET
+DELETE</property>
+  <property name="sling.servlet.paths" type="String" value="/bin/keepalive/categoryService"/>
+  <property name="sling.servlet.extensions" type="String">txt
+json</property>
+  <service>
+    <provide interface="javax.servlet.Servlet"/>
+  </service>
+  <reference name="categoryService" interface="com.adobe.aem.guides.wknd.core.sevice.CategoryService" field="categoryService"/>
+  <implementation class="com.adobe.aem.guides.wknd.core.servlets.CategoryServlet"/>
+</scr:component>

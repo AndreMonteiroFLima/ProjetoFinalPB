@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.wknd.core.sevice.impl.ProductServiceImpl" immediate="true">
+  <service>
+    <provide interface="com.adobe.aem.guides.wknd.core.sevice.ProductService"/>
+  </service>
+  <reference name="categoryDao" interface="com.adobe.aem.guides.wknd.core.dao.CategoryDao" field="categoryDao"/>
+  <reference name="productDao" interface="com.adobe.aem.guides.wknd.core.dao.ProductDao" field="productDao"/>
+  <implementation class="com.adobe.aem.guides.wknd.core.sevice.impl.ProductServiceImpl"/>
+</scr:component>
