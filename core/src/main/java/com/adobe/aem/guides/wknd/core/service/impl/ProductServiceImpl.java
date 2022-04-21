@@ -73,16 +73,34 @@ public class ProductServiceImpl implements ProductService {
         try {
             objProductConverter = gson.fromJson(userPostString, ProductModel.class);
 
-            if (objProductConverter.getCategoryId() == null ||  ((objProductConverter.getName() == null || objProductConverter.getName().isEmpty())) ||
-                    ((objProductConverter.getPrice() == null || objProductConverter.getPrice().equals(0))) ||
-                    ((objProductConverter.getDescription() == null || objProductConverter.getDescription().isEmpty()))) {
-                ResponseSetter.setResponse("Cannot add product. Provide all the required fields",HttpServletResponse.SC_BAD_REQUEST,response,urlReturn);
-            } else {
-                productDao.save(objProductConverter);
-                ResponseSetter.setOkResponse(new Gson().toJson(objProductConverter),HttpServletResponse.SC_OK,response);
-            }
+            postVerify(response, gson, objProductConverter);
         }catch (Exception e) {
-            ResponseSetter.setResponse("Error while trying to map the json ",HttpServletResponse.SC_BAD_REQUEST,response,urlReturn);
+            try {
+                Type listType = new TypeToken<ArrayList<ProductModel>>() {}.getType();
+                List<ProductModel> listProductConverter = new ArrayList<>();
+                listProductConverter = gson.fromJson(userPostString, listType);
+
+                listProductConverter.forEach(productModel -> {
+                    try {
+                        postVerify(response, gson, productModel);
+                    } catch (IOException ex) {
+                        throw new RuntimeException("Error in postProduct", ex);
+                    }
+                });
+            } catch (Exception ex) {
+                ResponseSetter.setResponse("Error while trying to map the json ", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+            }
+        }
+    }
+
+    private void postVerify(SlingHttpServletResponse response, Gson gson, ProductModel objProductConverter) throws IOException {
+        if (objProductConverter.getCategoryId() == null ||  ((objProductConverter.getName() == null || objProductConverter.getName().isEmpty())) ||
+                ((objProductConverter.getPrice() == null || objProductConverter.getPrice().equals(0))) ||
+                ((objProductConverter.getDescription() == null || objProductConverter.getDescription().isEmpty()))) {
+            ResponseSetter.setResponse("Cannot add product. Provide all the required fields",HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+        } else {
+            productDao.save(objProductConverter);
+            ResponseSetter.setOkResponse(gson.toJson(objProductConverter),HttpServletResponse.SC_OK, response);
         }
     }
 

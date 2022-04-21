@@ -62,15 +62,33 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             objCategoryConverter = gson.fromJson(userPostString, CategoryModel.class);
 
-            if (((objCategoryConverter.getName() == null || objCategoryConverter.getName().isEmpty()))){
-                ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
-            } else {
-                
-                categoryDao.save(objCategoryConverter);
-                ResponseSetter.setOkResponse(new Gson().toJson(objCategoryConverter),HttpServletResponse.SC_CREATED,response);
-            }
+            postVerify(response, gson, objCategoryConverter);
         }catch (Exception e) {
-            ResponseSetter.setResponse("Cannot save category. Error while trying to map the json.", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+            try{
+                Type listType = new TypeToken<ArrayList<CategoryModel>>(){}.getType();
+                List<CategoryModel> listCategoryConverter = new ArrayList<>();
+                listCategoryConverter = gson.fromJson(userPostString, listType);
+
+                listCategoryConverter.forEach(categoryModel -> {
+                    try {
+                        postVerify(response, gson, categoryModel);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }  catch (Exception e1) {
+                ResponseSetter.setResponse("Cannot save category. Error while trying to map the json.", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+            }
+        }
+    }
+
+    private void postVerify(SlingHttpServletResponse response, Gson gson, CategoryModel objCategoryConverter) throws IOException {
+        if (((objCategoryConverter.getName() == null || objCategoryConverter.getName().isEmpty()))){
+            ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+        } else {
+
+            categoryDao.save(objCategoryConverter);
+            ResponseSetter.setOkResponse(gson.toJson(objCategoryConverter),HttpServletResponse.SC_CREATED, response);
         }
     }
 

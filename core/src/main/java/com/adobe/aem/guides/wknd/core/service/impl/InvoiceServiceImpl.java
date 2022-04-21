@@ -2,6 +2,7 @@ package com.adobe.aem.guides.wknd.core.service.impl;
 
 import com.adobe.aem.guides.wknd.core.dao.InvoiceDao;
 import com.adobe.aem.guides.wknd.core.dao.ProductDao;
+import com.adobe.aem.guides.wknd.core.exception.ProductDoesNotExistException;
 import com.adobe.aem.guides.wknd.core.models.ClientModel;
 import com.adobe.aem.guides.wknd.core.models.ErroMessage;
 import com.adobe.aem.guides.wknd.core.models.InvoiceModel;
@@ -68,20 +69,39 @@ public class InvoiceServiceImpl implements InvoiceService {
         try {
             objInvoiceConverter = gson.fromJson(userPostString, InvoiceModel.class);
 
-            if ((objInvoiceConverter.getInvoiceDate() == null) ||
-                    ((objInvoiceConverter.getInvoiceItens() == null || objInvoiceConverter.getInvoiceItens().isEmpty())) ||
-                    ((objInvoiceConverter.getInvoiceValue() == null || objInvoiceConverter.getInvoiceValue().equals(0))) ||
-                    ((objInvoiceConverter.getClientId() < 0))) {
-                ResponseSetter.setResponse(gson.toJson("Cannot add Invoice. Provide all the required fields"), HttpServletResponse.SC_BAD_REQUEST,response,urlReturn);
-
-            } else {
-                if(productDao.verifyProducts(objInvoiceConverter.getInvoiceItens())) {
-                    invoiceDao.save(objInvoiceConverter);
-                    ResponseSetter.setOkResponse("Invoice added successfully.\n"+gson.toJson(objInvoiceConverter), HttpServletResponse.SC_CREATED,response);
-                }
-            }
+            postVerify(response, gson, objInvoiceConverter);
         }catch (Exception e) {
-            ResponseSetter.setResponse(gson.toJson("Cannot add Invoice. Error while trying to map the json. "+e.getMessage()), HttpServletResponse.SC_BAD_REQUEST,response,urlReturn);
+            try{
+                Type listType = new TypeToken<ArrayList<InvoiceModel>>(){}.getType();
+                List<InvoiceModel> listInvoiceConverter = new ArrayList<>();
+                listInvoiceConverter = gson.fromJson(userPostString, listType);
+
+                listInvoiceConverter.forEach(invoiceModel -> {
+                    try {
+                        postVerify(response, gson, invoiceModel);
+                    } catch (IOException | ProductDoesNotExistException ex) {
+                        throw new RuntimeException("Error in postInvoice", ex);
+                    }
+                });
+
+            }  catch (Exception e1) {
+                ResponseSetter.setResponse(gson.toJson("Cannot add Invoice. Error while trying to map the json. " + e.getMessage()), HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+            }
+        }
+    }
+
+    private void postVerify(SlingHttpServletResponse response, Gson gson, InvoiceModel objInvoiceConverter) throws IOException, ProductDoesNotExistException {
+        if ((objInvoiceConverter.getInvoiceDate() == null) ||
+                ((objInvoiceConverter.getInvoiceItens() == null || objInvoiceConverter.getInvoiceItens().isEmpty())) ||
+                ((objInvoiceConverter.getInvoiceValue() == null || objInvoiceConverter.getInvoiceValue().equals(0))) ||
+                ((objInvoiceConverter.getClientId() < 0))) {
+            ResponseSetter.setResponse(gson.toJson("Cannot add Invoice. Provide all the required fields"), HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+
+        } else {
+            if(productDao.verifyProducts(objInvoiceConverter.getInvoiceItens())) {
+                invoiceDao.save(objInvoiceConverter);
+                ResponseSetter.setOkResponse("Invoice added successfully.\n"+ gson.toJson(objInvoiceConverter), HttpServletResponse.SC_CREATED, response);
+            }
         }
     }
 

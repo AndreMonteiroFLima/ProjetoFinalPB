@@ -65,14 +65,32 @@ public class ClientServiceImpl implements ClientService {
         try {
             objClientConverter = gson.fromJson(userPostString, ClientModel.class);
 
-            if (((objClientConverter.getName() == null || objClientConverter.getName().isEmpty()))){
-                ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
-            } else {
-                clientDao.save(objClientConverter);
-                ResponseSetter.setOkResponse(new Gson().toJson(objClientConverter), HttpServletResponse.SC_CREATED, response);
-            }
+            postVerify(response, gson, objClientConverter);
         }catch (Exception e) {
+            try {
+                Type listType = new TypeToken<ArrayList<ClientModel>>(){}.getType();
+                List<ClientModel> listClientConverter = new ArrayList<>();
+                listClientConverter = gson.fromJson(userPostString, listType);
+                listClientConverter.forEach(clientModel -> {
+                    try {
+                        postVerify(response, gson, clientModel);
+                    } catch (IOException ex) {
+                        throw new RuntimeException("Error in postClient", ex);
+                    }
+                });
+            }catch (Exception e1) {
+
+            }
             ResponseSetter.setResponse("Error while trying to map the json. " + e.getMessage(), HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+        }
+    }
+
+    private void postVerify(SlingHttpServletResponse response, Gson gson, ClientModel objClientConverter) throws IOException {
+        if (((objClientConverter.getName() == null || objClientConverter.getName().isEmpty()))){
+            ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+        } else {
+            clientDao.save(objClientConverter);
+            ResponseSetter.setOkResponse(gson.toJson(objClientConverter), HttpServletResponse.SC_CREATED, response);
         }
     }
 
@@ -122,12 +140,12 @@ public class ClientServiceImpl implements ClientService {
                     try {
                         putVerify(response, gson, clientModel);
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        throw new RuntimeException("Error while trying to update client. " + ex.getMessage());
                     }
                 });
 
             }  catch (Exception e1) {
-                ResponseSetter.setResponse("Cannot save client. Error while trying to map the json.", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+                ResponseSetter.setResponse("Cannot save client. Error while trying to map the json. "+e.getMessage(), HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
             }
         }
     }
