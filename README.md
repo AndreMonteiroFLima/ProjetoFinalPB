@@ -88,12 +88,14 @@ Como Utilizar
 	Ao fazer uma Requisição para o catalogo "www.localhost:4502/bin/keepalive/productService" pode-se utilizar alguns filtros:
 	'/priceDown/' ordena os preços do menor para o maior. 
 	'/digiteOSeuTexto/' procura por palavras chaves dentro do catalogo.
-	'/c"n"/' onde "n" representa um inteiro, procura por produtos com a categoria correspondente ao numero "n".
+	'/"n"/' onde "n" representa um inteiro, procura por produtos com a categoria correspondente ao numero "n".
 	Esses filtros podem ser usados em conjunto e em qualquer ordem exemplo:
 	www.localhost:4502/bin/keepalive/productService/c1/roupa/priceDown
 	
+	
 	Ao consultar sem nenhum parametro o programa apresentara a lista completa de produtos.
-	E com apenas um parametro numerico, trará o produto correspondente aquele Id.
+	E com apenas um parametro numerico, trará o produto correspondente aquele Id. 
+	Ao fazer una requisição com apenas um numero automaticamente ira para a opção acima
 	
 
 
