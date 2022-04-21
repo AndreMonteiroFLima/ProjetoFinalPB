@@ -1,5 +1,7 @@
 package com.adobe.aem.guides.wknd.core.models;
 
+import com.google.gson.annotations.Expose;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

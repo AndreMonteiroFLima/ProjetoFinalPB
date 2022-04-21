@@ -83,7 +83,6 @@ public class InvoiceServiceImpl implements InvoiceService {
                         throw new RuntimeException("Error in postInvoice", ex);
                     }
                 });
-
             }  catch (Exception e1) {
                 ResponseSetter.setResponse(gson.toJson("Cannot add Invoice. Error while trying to map the json. " + e.getMessage()), HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
             }

@@ -71,6 +71,7 @@ public class ClientServiceImpl implements ClientService {
                 Type listType = new TypeToken<ArrayList<ClientModel>>(){}.getType();
                 List<ClientModel> listClientConverter = new ArrayList<>();
                 listClientConverter = gson.fromJson(userPostString, listType);
+
                 listClientConverter.forEach(clientModel -> {
                     try {
                         postVerify(response, gson, clientModel);

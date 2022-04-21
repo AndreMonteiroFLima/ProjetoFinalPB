@@ -29,6 +29,7 @@ com\adobe\aem\guides\wknd\core\service\CategoryService.class
 com\adobe\aem\guides\wknd\core\service\impl\CategoryServiceImpl.class
 com\adobe\aem\guides\wknd\core\models\ReportModel.class
 com\adobe\aem\guides\wknd\core\servlets\ClientServlet.class
+com\adobe\aem\guides\wknd\core\service\impl\InvoiceServiceImpl$2.class
 com\adobe\aem\guides\wknd\core\service\impl\CategoryServiceImpl$1.class
 com\adobe\aem\guides\wknd\core\servlets\InvoiceServlet.class
 com\adobe\aem\guides\wknd\core\listeners\package-info.class
@@ -44,12 +45,15 @@ com\adobe\aem\guides\wknd\core\service\impl\InvoiceServiceImpl$1.class
 com\adobe\aem\guides\wknd\core\models\InvoiceModel.class
 com\adobe\aem\guides\wknd\core\dao\ProductDao.class
 com\adobe\aem\guides\wknd\core\service\DatabaseService.class
+com\adobe\aem\guides\wknd\core\service\impl\CategoryServiceImpl$2.class
 com\adobe\aem\guides\wknd\core\models\ProductModel.class
 com\adobe\aem\guides\wknd\core\service\ProductService.class
 com\adobe\aem\guides\wknd\core\dao\ReportDao.class
 com\adobe\aem\guides\wknd\core\models\CategoryModel.class
 com\adobe\aem\guides\wknd\core\service\impl\DatabaseServiceImpl.class
 com\adobe\aem\guides\wknd\core\filters\ParamFilter.class
+com\adobe\aem\guides\wknd\core\service\impl\ClientServiceImpl$2.class
+com\adobe\aem\guides\wknd\core\service\impl\ProductServiceImpl$2.class
 com\adobe\aem\guides\wknd\core\exception\CategoryDoesNotExistException.class
 com\adobe\aem\guides\wknd\core\servlets\SimpleServlet.class
 com\adobe\aem\guides\wknd\core\filters\package-info.class

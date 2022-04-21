@@ -76,6 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
                         ex.printStackTrace();
                     }
                 });
+
             }  catch (Exception e1) {
                 ResponseSetter.setResponse("Cannot save category. Error while trying to map the json.", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
             }

@@ -74,6 +74,7 @@ public class ProductServiceImpl implements ProductService {
             objProductConverter = gson.fromJson(userPostString, ProductModel.class);
 
             postVerify(response, gson, objProductConverter);
+
         }catch (Exception e) {
             try {
                 Type listType = new TypeToken<ArrayList<ProductModel>>() {}.getType();
