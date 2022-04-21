@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.wknd.core.servlets.InvoiceServlet" immediate="true">
+  <property name="service.description" type="String" value="Invoice Service All"/>
+  <property name="sling.servlet.methods" type="String">POST
+GET
+DELETE</property>
+  <property name="sling.servlet.paths" type="String" value="/bin/keepalive/invoiceService"/>
+  <property name="sling.servlet.extensions" type="String">txt
+json</property>
+  <service>
+    <provide interface="javax.servlet.Servlet"/>
+  </service>
+  <reference name="invoiceService" interface="com.adobe.aem.guides.wknd.core.service.InvoiceService" field="invoiceService"/>
+  <implementation class="com.adobe.aem.guides.wknd.core.servlets.InvoiceServlet"/>
+</scr:component>

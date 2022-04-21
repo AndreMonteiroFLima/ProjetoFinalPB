@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>WKND Sites Project - UI content</comment>
+<entry key="allowIndexDefinitions">false</entry>
+<entry key="acHandling">merge</entry>
+<entry key="dependencies-locations">com.adobe.aem.guides:aem-guides-wknd.ui.apps:0.0.1-SNAPSHOT=maven:com.adobe.aem.guides:aem-guides-wknd.ui.apps:0.0.1-SNAPSHOT:zip</entry>
+<entry key="created">2022-04-20T19:35:36.822Z</entry>
+<entry key="groupId">com.adobe.aem.guides</entry>
+<entry key="description">UI content package for WKND Sites Project</entry>
+<entry key="version">0.0.1-SNAPSHOT</entry>
+<entry key="packageType">content</entry>
+<entry key="requiresRoot">false</entry>
+<entry key="dependencies">com.adobe.aem.guides:aem-guides-wknd.ui.apps:0.0.1-SNAPSHOT</entry>
+<entry key="cloudManagerTarget">none</entry>
+<entry key="name">aem-guides-wknd.ui.content</entry>
+<entry key="artifactId">aem-guides-wknd.ui.content</entry>
+<entry key="group">com.adobe.aem.guides</entry>
+</properties>

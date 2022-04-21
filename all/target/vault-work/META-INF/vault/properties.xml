@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>WKND Sites Project - All</comment>
+<entry key="allowIndexDefinitions">false</entry>
+<entry key="created">2022-04-20T19:35:39.876Z</entry>
+<entry key="groupId">com.adobe.aem.guides</entry>
+<entry key="name">aem-guides-wknd.all</entry>
+<entry key="description">All content package for WKND Sites Project</entry>
+<entry key="artifactId">aem-guides-wknd.all</entry>
+<entry key="version">0.0.1-SNAPSHOT</entry>
+<entry key="packageType">container</entry>
+<entry key="requiresRoot">false</entry>
+<entry key="group">com.adobe.aem.guides</entry>
+</properties>

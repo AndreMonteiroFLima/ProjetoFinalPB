@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.wknd.core.service.impl.DatabaseServiceImpl" immediate="true">
+  <service>
+    <provide interface="com.adobe.aem.guides.wknd.core.service.DatabaseService"/>
+  </service>
+  <reference name="dataSourcePool" interface="com.day.commons.datasource.poolservice.DataSourcePool" field="dataSourcePool"/>
+  <implementation class="com.adobe.aem.guides.wknd.core.service.impl.DatabaseServiceImpl"/>
+</scr:component>

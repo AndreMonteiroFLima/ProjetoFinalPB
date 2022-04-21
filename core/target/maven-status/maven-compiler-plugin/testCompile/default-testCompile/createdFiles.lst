@@ -1,0 +1,7 @@
+com\adobe\aem\guides\wknd\core\testcontext\AppAemContext$1.class
+com\adobe\aem\guides\wknd\core\listeners\SimpleResourceListenerTest.class
+com\adobe\aem\guides\wknd\core\schedulers\SimpleScheduledTaskTest.class
+com\adobe\aem\guides\wknd\core\filters\LoggingFilterTest.class
+com\adobe\aem\guides\wknd\core\servlets\SimpleServletTest.class
+com\adobe\aem\guides\wknd\core\testcontext\AppAemContext.class
+com\adobe\aem\guides\wknd\core\models\HelloWorldModelTest.class

@@ -1,0 +1,36 @@
+{
+  "id":"com.adobe.aem.guides:aem-guides-wknd.all:slingosgifeature:author:0.0.1-SNAPSHOT",
+  "configurations":  {
+    "com.adobe.granite.cors.impl.CORSPolicyImpl~wknd":    {
+      "alloworigin":[
+        "http://localhost:3000"
+      ],
+      "allowedpaths":[
+        "/(content|conf)/wknd.*"
+      ],
+      "supportedheaders":[
+        "Authorization",
+        "Origin",
+        "Accept",
+        "X-Requested-With",
+        "Content-Type",
+        "Access-Control-Request-Method",
+        "Access-Control-Request-Headers"
+      ],
+      "supportedmethods":[
+        "GET",
+        "HEAD"
+      ],
+      "alloworiginregexp":[
+      ],
+      ":configurator:content-package-origins":"com.adobe.aem.guides:aem-guides-wknd.all:0.0.1-SNAPSHOT|com.adobe.aem.guides:aem-guides-wknd.ui.config:0.0.1-SNAPSHOT"
+    },
+    "com.day.cq.wcm.mobile.core.impl.MobileEmulatorProvider~wknd":    {
+      "mobile.resourceTypes":[
+        "wknd/components/page"
+      ],
+      "README":"Indicate which page resource types should display the mobile emulators.",
+      ":configurator:content-package-origins":"com.adobe.aem.guides:aem-guides-wknd.all:0.0.1-SNAPSHOT|com.adobe.aem.guides:aem-guides-wknd.ui.config:0.0.1-SNAPSHOT"
+    }
+  }
+}
