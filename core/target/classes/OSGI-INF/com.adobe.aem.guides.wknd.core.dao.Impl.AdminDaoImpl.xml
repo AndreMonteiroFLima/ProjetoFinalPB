@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.wknd.core.dao.Impl.AdminDaoImpl" immediate="true">
+  <service>
+    <provide interface="com.adobe.aem.guides.wknd.core.dao.Impl.AdminDaoImpl"/>
+  </service>
+  <reference name="databaseService" interface="com.adobe.aem.guides.wknd.core.service.DatabaseService" field="databaseService"/>
+  <implementation class="com.adobe.aem.guides.wknd.core.dao.Impl.AdminDaoImpl"/>
+</scr:component>
