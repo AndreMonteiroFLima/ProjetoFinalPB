@@ -3,6 +3,7 @@
   <service>
     <provide interface="com.adobe.aem.guides.wknd.core.service.InvoiceService"/>
   </service>
+  <reference name="clientDao" interface="com.adobe.aem.guides.wknd.core.dao.ClientDao" field="clientDao"/>
   <reference name="invoiceDao" interface="com.adobe.aem.guides.wknd.core.dao.InvoiceDao" field="invoiceDao"/>
   <reference name="productDao" interface="com.adobe.aem.guides.wknd.core.dao.ProductDao" field="productDao"/>
   <implementation class="com.adobe.aem.guides.wknd.core.service.impl.InvoiceServiceImpl"/>

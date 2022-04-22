@@ -4,7 +4,7 @@
 <comment>WKND Sites Project - UI config</comment>
 <entry key="cloudManagerTarget">none</entry>
 <entry key="allowIndexDefinitions">false</entry>
-<entry key="created">2022-04-22T21:19:06.928Z</entry>
+<entry key="created">2022-04-22T23:01:00.186Z</entry>
 <entry key="groupId">com.adobe.aem.guides</entry>
 <entry key="name">aem-guides-wknd.ui.config</entry>
 <entry key="description">UI config package for WKND Sites Project</entry>

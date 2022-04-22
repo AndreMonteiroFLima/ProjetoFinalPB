@@ -100,8 +100,13 @@ public class ProductServiceImpl implements ProductService {
                 ((objProductConverter.getDescription() == null || objProductConverter.getDescription().isEmpty()))) {
             ResponseSetter.setResponse("Cannot add product. Provide all the required fields",HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
         } else {
+            for (Integer categoryId : objProductConverter.getCategoryId()) {
+                if(!categoryDao.exists(categoryId)) {
+                    throw new RuntimeException("Cannot add product. CategoryId=" + categoryId + " does not exist");
+                }
+            }
             productDao.save(objProductConverter);
-            ResponseSetter.setOkResponse(gson.toJson(objProductConverter),HttpServletResponse.SC_OK, response);
+            ResponseSetter.setOkResponse(gson.toJson(objProductConverter), HttpServletResponse.SC_OK, response);
         }
     }
 
