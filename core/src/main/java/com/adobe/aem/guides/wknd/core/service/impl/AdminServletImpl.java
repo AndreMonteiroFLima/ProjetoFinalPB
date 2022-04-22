@@ -8,6 +8,7 @@ import com.adobe.aem.guides.wknd.core.models.UserModel;
 import com.adobe.aem.guides.wknd.core.service.AdminService;
 import com.adobe.aem.guides.wknd.core.utils.ResponseSetter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -30,22 +31,24 @@ public class AdminServletImpl implements AdminService {
 
     @Reference
     private AdminDao adminDao;
+
+    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     
     @Override
     public void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-
+        
         if(request.getParameter("userId")==null) {
             List<UserModel> users = adminDao.getUsers();
-            ResponseSetter.setOkResponse(new Gson().toJson(users), HttpServletResponse.SC_OK, response);
+            ResponseSetter.setOkResponse(gson.toJson(users), HttpServletResponse.SC_OK, response);
         }else {
             UserModel userModel = adminDao.getUser(Integer.parseInt(request.getParameter("userId")));
             if (userModel == null) {
                 ResponseSetter.setResponse("Cannot find userId="+request.getParameter("userId"), HttpServletResponse.SC_NOT_FOUND, response,urlReturn);
             } else {
-                ResponseSetter.setOkResponse(new Gson().toJson(userModel), HttpServletResponse.SC_OK, response);
+                ResponseSetter.setOkResponse(gson.toJson(userModel), HttpServletResponse.SC_OK, response);
             }
         }
     }
@@ -57,9 +60,10 @@ public class AdminServletImpl implements AdminService {
         response.setContentType("application/json");
 
         String userPostString = IOUtils.toString(request.getReader());
-        Gson gson = new Gson();
+        ;
         UserModel objUserConverter = new UserModel();
         try {
+            //Gson2
             objUserConverter = gson.fromJson(userPostString, UserModel.class);
 
             postVerify(response, gson, objUserConverter);
@@ -67,6 +71,7 @@ public class AdminServletImpl implements AdminService {
             try {
                 Type listType = new TypeToken<ArrayList<UserModel>>(){}.getType();
                 List<UserModel> listUserConverter = new ArrayList<>();
+                //Gson2
                 listUserConverter = gson.fromJson(userPostString, listType);
 
                 listUserConverter.forEach(userModel -> {
@@ -77,15 +82,15 @@ public class AdminServletImpl implements AdminService {
                     }
                 });
             }catch (Exception e1) {
-
+                ResponseSetter.setResponse("Error while trying to map the json. " + e.getMessage(), HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
             }
-            ResponseSetter.setResponse("Error while trying to map the json. " + e.getMessage(), HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+            
         }
 
     }
     private void postVerify(SlingHttpServletResponse response, Gson gson, UserModel objUserConverter) throws IOException {
         if (((objUserConverter.getUsername() == null || objUserConverter.getUsername().isEmpty()) || (objUserConverter.getPassword() == null || objUserConverter.getPassword().isEmpty()))) {
-            ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
+            ResponseSetter.setResponse("Cannot add Invoice. Provide the required fields username and password.", HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
         } else {
             adminDao.save(objUserConverter);
             ResponseSetter.setOkResponse(gson.toJson(objUserConverter), HttpServletResponse.SC_CREATED, response);
@@ -109,7 +114,7 @@ public class AdminServletImpl implements AdminService {
             }else {
                 try {
                     adminDao.delete(Integer.parseInt(request.getParameter("userId")));
-                    ResponseSetter.setOkResponse(new Gson().toJson("User deleted"), HttpServletResponse.SC_OK, response);
+                    ResponseSetter.setOkResponse(gson.toJson("User deleted"), HttpServletResponse.SC_OK, response);
                 } catch (Exception e) {
                     ResponseSetter.setResponse("Error while trying to delete user. " + e.getMessage(), HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
                 }
@@ -125,15 +130,17 @@ public class AdminServletImpl implements AdminService {
 
 
         String userPostString = IOUtils.toString(request.getReader());
-        Gson gson = new Gson();
+        ;
         UserModel objUserConverter = new UserModel();
         try {
+            //Gson2
             objUserConverter = gson.fromJson(userPostString, UserModel.class);
             putVerify(response, gson, objUserConverter);
         }catch (Exception e) {
             try{
                 Type listType = new TypeToken<ArrayList<UserModel>>(){}.getType();
                 List<UserModel> listUserConverter = new ArrayList<>();
+                //Gson2
                 listUserConverter = gson.fromJson(userPostString, listType);
 
                 listUserConverter.forEach(userModel -> {
@@ -154,7 +161,7 @@ public class AdminServletImpl implements AdminService {
     private void putVerify(SlingHttpServletResponse response, Gson gson, UserModel objUserConverter) throws IOException {
         if(adminDao.getUser(objUserConverter.getId())!=null) {
             if (((objUserConverter.getId() <= 0) || (objUserConverter.getUsername() == null || objUserConverter.getUsername().isEmpty()) || (objUserConverter.getPassword() == null || objUserConverter.getPassword().isEmpty()))) {
-                ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+                ResponseSetter.setResponse("Cannot add Invoice. Provide the required fields username and password.", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
             } else {
                 if (adminDao.getUser(objUserConverter.getId()) != null) {
                     adminDao.update(objUserConverter);

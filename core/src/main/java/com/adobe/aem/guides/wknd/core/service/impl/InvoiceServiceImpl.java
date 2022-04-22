@@ -161,8 +161,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             if (((objInvoiceConverter.getInvoiceId() <= 0) || (objInvoiceConverter.getInvoiceDate() == null) ||
                     ((objInvoiceConverter.getInvoiceItens() == null || objInvoiceConverter.getInvoiceItens().isEmpty())) ||
                     ((objInvoiceConverter.getInvoiceValue() == null || objInvoiceConverter.getInvoiceValue().equals(0))) ||
-                    ((objInvoiceConverter.getClientId() < 0)))) {
-                ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+                    ((objInvoiceConverter.getClientId() <= 0) ))) {
+                ResponseSetter.setResponse("Cannot add Invoice. Provide all the required fields", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
             } else {
                 if (invoiceDao.getInvoice(objInvoiceConverter.getInvoiceId()) != null) {
                     invoiceDao.update(objInvoiceConverter);

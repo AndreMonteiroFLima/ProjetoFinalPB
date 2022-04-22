@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" name="com.adobe.aem.guides.wknd.core.servlets.LoginServlet" immediate="true">
-  <property name="service.description" type="String" value="Admin Service All"/>
+  <property name="service.description" type="String" value="Login Service All"/>
   <property name="sling.servlet.methods" type="String">POST
 DELETE</property>
   <property name="sling.servlet.paths" type="String" value="/bin/keepalive/loginServlet"/>

@@ -14,6 +14,7 @@ com\adobe\aem\guides\wknd\core\service\impl\InvoiceServiceImpl.class
 com\adobe\aem\guides\wknd\core\service\impl\ProductServiceImpl$1.class
 com\adobe\aem\guides\wknd\core\service\LoginService.class
 com\adobe\aem\guides\wknd\core\models\ClientModel.class
+com\adobe\aem\guides\wknd\core\filters\AuthFilter.class
 com\adobe\aem\guides\wknd\core\service\impl\AdminServletImpl$2.class
 com\adobe\aem\guides\wknd\core\dao\InvoiceDao.class
 com\adobe\aem\guides\wknd\core\filters\LoggingFilter.class

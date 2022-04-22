@@ -11,11 +11,13 @@ import java.io.PrintWriter;
 public class ResponseSetter {
 
     public static void setOkResponse(String message, int httpCode, SlingHttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
         response.setStatus(httpCode);
         response.getWriter().write(message);
     }
 
     public static void setResponse(String message, int httpCode, SlingHttpServletResponse response,String urlReturn) throws IOException {
+        response.setContentType("application/json");
         ErroMessage errorMessage = new ErroMessage(message, httpCode, urlReturn);
         response.setStatus(httpCode);
         response.getWriter().write(new Gson().toJson(errorMessage));

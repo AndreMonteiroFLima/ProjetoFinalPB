@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component(service = AdminDaoImpl.class, immediate = true)
+@Component(service = AdminDao.class, immediate = true)
 public class AdminDaoImpl implements AdminDao {
 
     @Reference

@@ -1,4 +1,4 @@
-# File created on Thu Apr 21 01:57:53 BRT 2022 by the Apache Sling Content Package to Sling Feature converter
+# File created on Fri Apr 22 18:19:08 BRT 2022 by the Apache Sling Content Package to Sling Feature converter
 # content-package path, content-package ID, content-package type, content-package parent ID, path in parent content-package, absolute path
 C:\Users\Andre\Desktop\Estagio\Sprint AEM\Teste\aem-guides-wknd\all\target\aem-guides-wknd.all-0.0.1-SNAPSHOT.zip,com.adobe.aem.guides:aem-guides-wknd.all:0.0.1-SNAPSHOT,CONTAINER,,,
 C:\Users\Andre\Desktop\Estagio\Sprint AEM\Teste\aem-guides-wknd\all\target\aem-guides-wknd.all-0.0.1-SNAPSHOT.zip,com.adobe.aem.guides:aem-guides-wknd.ui.apps:0.0.1-SNAPSHOT,APPLICATION,com.adobe.aem.guides:aem-guides-wknd.all:0.0.1-SNAPSHOT,/jcr_root/apps/wknd-packages/application/install/aem-guides-wknd.ui.apps-0.0.1-SNAPSHOT.zip,C:\Users\Andre\Desktop\Estagio\Sprint AEM\Teste\aem-guides-wknd\all\target\aem-guides-wknd.all-0.0.1-SNAPSHOT.zip!/jcr_root/apps/wknd-packages/application/install/aem-guides-wknd.ui.apps-0.0.1-SNAPSHOT.zip

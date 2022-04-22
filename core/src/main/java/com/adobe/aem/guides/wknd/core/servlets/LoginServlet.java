@@ -31,7 +31,7 @@ import static org.apache.sling.api.servlets.ServletResolverConstants.SLING_SERVL
         SLING_SERVLET_PATHS + "=" + "/bin/keepalive/loginServlet",
         SLING_SERVLET_EXTENSIONS + "=" + "txt", SLING_SERVLET_EXTENSIONS + "=" + "json"})
 
-@ServiceDescription("Admin Service All")
+@ServiceDescription("Login Service All")
 public class LoginServlet extends SlingAllMethodsServlet {
 
     @Reference
@@ -40,6 +40,7 @@ public class LoginServlet extends SlingAllMethodsServlet {
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         loginService.login(request, response);
+
     }
 
     @Override
