@@ -16,12 +16,21 @@ Banco De Dados
 	usuario = root;
 	senha = suaSenhaSql;
 	
+	CREATE TABLE `user` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`username` varchar(255) NOT NULL,
+	`password` varchar(255) NOT NULL,
+	PRIMARY KEY (`id`)
+	);
+
+	
 	Tabelas:
 	 CREATE TABLE `categories` (
 	  `id` int NOT NULL AUTO_INCREMENT,
 	  `name` varchar(255) NOT NULL,
 	  PRIMARY KEY (`id`)
 	 );
+
 	 
 	 CREATE TABLE `product`(
 	  `id` int NOT NULL AUTO_INCREMENT,
@@ -59,12 +68,32 @@ Banco De Dados
    	   foreign key(`product_id`)references product(`id`)
 	 );
 	 
+	INSERT INTO users (id, username, password) VALUES (1,'admin','admin');
+	 	
+	INSERT INTO categories (ID, NAME) VALUES (1,'Acessórios');
+
+	INSERT INTO product (id, name, description, price) VALUES (1,'Produto de Teste','Teste Do Produto',1500.0);
+
+	INSERT INTO product_category (product_id, category_id) VALUES (1,1);
+
+	INSERT INTO client (id, name) VALUES (1,'Client');
+
+	INSERT INTO invoice (invoice_id, invoice_date, invoice_value, client_id) VALUES (1,'2022-4-20 14:27:32.00',1500.0,1);
+
+	INSERT INTO invoice_product (invoice_id, product_id) VALUES (1,1);
+	 
 
 Após a configuração das tabelas pode-se iniciar os testes nos endpoints criados
 
 --------------------------
 EndPoints
 --------------------------
+
+	#User
+	www.localhost:4502/bin/keepalive/adminService - POST, GET, DELETE e PUT 
+
+	#Login
+	www.localhost:4502/bin/keepalive/adminServlet - POST, DELETE
 
 	#Categorias - Retorno json
 	www.localhost:4502/bin/keepalive/categoryService - POST, GET, DELETE e PUT 
@@ -81,24 +110,307 @@ EndPoints
 	#Report de Produtos - Retorno HTML
 	www.localhost:4502/bin/keepalive/product/user/report - GET
 
---------------------------
-Como Utilizar
---------------------------
-	
-	Ao fazer uma Requisição para o catalogo "www.localhost:4502/bin/keepalive/productService" pode-se utilizar alguns filtros:
-	'/priceDown/' ordena os preços do menor para o maior. 
-	'/digiteOSeuTexto/' procura por palavras chaves dentro do catalogo.
-	'/"n"/' onde "n" representa um inteiro, procura por produtos com a categoria correspondente ao numero "n".
-	Esses filtros podem ser usados em conjunto e em qualquer ordem exemplo:
-	www.localhost:4502/bin/keepalive/productService/c1/roupa/priceDown
+
+# Como Utilizar
+
 	
 	
-	Ao consultar sem nenhum parametro o programa apresentara a lista completa de produtos.
-	E com apenas um parametro numerico, trará o produto correspondente aquele Id. 
-	Ao fazer una requisição com apenas um numero automaticamente ira para a opção acima
+## Login
+	
+	------------------------------------------
+	localhost:4502/bin/keepalive/LoginServlet
+	------------------------------------------
+	
+Payload
+
+	{
+	    "username":"admin",
+	    "password":"admin"
+	}
+
+POST 
+- Loga o usuario passado na payload
+
+	- `Parâmetros`: Nenhum.
+	
+	- `Payload`: Username e senha em formato Json no corpo da requisição.
+
+DELETE 
+
+- Desloga o usuario atual se houver algum logado
+
+	- `Parâmetros`: Nenhum.
+
+	- `Payload`: Nenhum.
+
+##
+
+## AdminService
+#### Login Necessario 
+
+	
+	------------------------------------------
+	localhost:4502/bin/keepalive/adminService
+	-----------------------------------------
+	
+Payload
+	
+	{
+	"username":"Teste",
+	"password":"Teste"
+	}
+
+POST 
+- Adiciona um novo Usuario ao sistema.
+
+	- `Parâmetros`: Nenhum.
+	
+	- `Payload`: usuario e senha em formato Json no corpo da requisição com exceção id.
+
+GET
+- Recupera a lista de Usuarios cadastrados no sistema (Sem Senha).
+	- `Parâmetros`: 
+		- Opcional 
+			- userId='id'.
+	
+	- `Payload`: Nenhum.
+
+DELETE 
+- Deleta um usuario.
+
+	- `Parâmetros`: Obrigatório - userId='id'.
+
+	- `Payload`: Nenhum.
+
+PUT
+- Atualiza um usuario escolhido.
+	- `Parâmetros`: Nenhum.
+
+	- `Payload`: Todos os campos.
+
+##
+
+## CategoryService
+#### Login Necessário 
+
+	
+	--------------------------------------------
+	localhost:4502/bin/keepalive/categoryService
+	--------------------------------------------
+Payload
+	
+	{
+	    "name":"Teste"
+	}
+	
+POST 
+- Adiciona uma nova categoria.
+
+	- `Parâmetros`: Nenhum.
+	
+	- `Payload`: nome da categoria em formato Json no corpo da requisição com exceção id.
+
+GET
+- Recupera a lista de categorias.
+	-  `Parâmetros`: 
+		-  Opcional 
+			- cateogryId='id'.
+	
+	- `Payload`: Nenhum.
+
+DELETE 
+- Deleta uma categoria.
+
+	- `Parâmetros`: 
+		- Obrigatório 
+			- categoryId='id'.
+
+	- `Payload`: Nenhum.
+
+PUT
+- Atualiza uma categoria escolhida.
+	- `Parâmetros`: Nenhum.
+
+	- `Payload`: Todos os campos.
+
+##
+
+## ProductService
+#### Login Necessário 
+
+	
+	--------------------------------------------
+	localhost:4502/bin/keepalive/productService
+	--------------------------------------------
+	
+Payload
+
+	[
+	    {
+	    "name": "Teste",
+	    "categoryId": [
+		1
+	    ],
+	    "description": "Teste",
+	    "price":150.0
+	    }
+	]
+
+POST 
+- Adiciona um novo Produto.
+
+	- `Parâmetros`: Nenhum.
+	
+	- `Payload`: Todos os campos em formato Json no corpo da requisição com exceção id.
+
+GET
+- Recupera a lista de produtos.
+	- `Parâmetros`: 
+		- Opcionais:
+			- productId='id' - Recupera um único produto. (único)
+			- categoryId='categoryId' - Recupera todos os produtos com determinada categoria. (Combinavel)
+			- priceDown - Ordena do menor preço para o maior. (Combinavel)
+			- word='palavra-chave' - Recupera todas os produtos com essa palavra chave. (Combinavel)
+	
+	- `Payload`: Nenhum.
+
+DELETE 
+- Deleta um produto.
+
+	- `Parâmetros`: 
+		- Obrigatório 
+			- productId='id'.
+		-O produto não será deletado se já estiver em uma nota fiscal. 	
+
+	- `Payload`: Nenhum.
+
+PUT
+- Atualiza um produto escolhido.
+	- `Parâmetros`: Nenhum.
+
+	- `Payload`: Todos os campos.
+
+##
+
+## ClientService
+#### Login Necessário 
+
+	
+	--------------------------------------------
+	localhost:4502/bin/keepalive/clientService
+	--------------------------------------------
+	
+Payload
+
+	{
+	    "name":"André Monteiro"
+	}
+
+POST 
+- Adiciona um novo Cliente.
+
+	- `Parâmetros`: Nenhum.
+	
+	- `Payload`: Todos os campos em formato Json no corpo da requisição com exceção do id.
+
+GET
+- Recupera a lista de Clientes.
+	- `Parâmetros`: 
+		- Opcional:
+			- clientId='id' - Recupera um único Cliente.
+			
+	- `Payload`: Nenhum.
+
+DELETE 
+- Deleta um Cliente.
+
+	- `Parâmetros`: 
+		- Obrigatório 
+			- clientId='id'.
+		-O cliente não será deletado se já estiver em uma nota fiscal. 	
+
+	- `Payload`: Nenhum.
+
+PUT
+- Atualiza um Cliente escolhido.
+	- `Parâmetros`: Nenhum.
+
+	- `Payload`: Todos os campos.
+
+##
+
+## InvoiceService
+#### Login Necessário 
+
+	
+	--------------------------------------------
+	localhost:4502/bin/keepalive/invoiceService
+	--------------------------------------------
+	
+Payload
+
+	{
+	    "invoiceDate":"YYYY-mm-ddTHH:mm:ss.SSSX",
+	    "invoiceItens":[
+		1
+	    ],
+	    "invoiceValue":150.0,
+	     "clientId": 1
+	}
+
+POST 
+- Adiciona uma nova Nota Fiscal.
+
+	- `Parâmetros`: Nenhum.
+	
+	- `Payload`: Todos os campos em formato Json no corpo da requisição com exceção do id.
+
+GET
+- Recupera a lista de Notas Fiscais.
+	- `Parâmetros`: 
+		- Opcional:
+			- clientId='id' - Recupera um único Cliente.
+			
+	- `Payload`: Nenhum.
+
+DELETE 
+- Deleta uma Nota Fiscal.
+
+	- `Parâmetros`: 
+		- Obrigatório 
+			- clientId='id'.
+		- O cliente não será deletado se já estiver em uma nota fiscal. 	
+
+	- `Payload`: Nenhum.
+
+PUT
+- Atualiza uma Nota Fiscal escolhida.
+	- `Parâmetros`: Nenhum.
+
+	- `Payload`: Todos os campos.
+
+##
+
+## ReportService
+#### Login Necessário 
+
+	
+	------------------------------------------------
+	localhost:4502/bin/keepalive/product/report
+	-------------------------------------------------
+	
 	
 
+GET
+- Recupera o relatório de todos os produtos comprados por um determinado Cliente.
+	- `Parâmetros`: 
+		- Obrigatório:
+			- userId='id'.
+			
+	- `Payload`: Nenhum.
 
+
+#
 
 # Sample AEM project template
 
