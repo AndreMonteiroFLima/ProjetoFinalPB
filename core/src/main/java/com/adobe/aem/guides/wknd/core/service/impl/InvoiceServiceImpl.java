@@ -1,7 +1,9 @@
 package com.adobe.aem.guides.wknd.core.service.impl;
 
+import com.adobe.aem.guides.wknd.core.dao.ClientDao;
 import com.adobe.aem.guides.wknd.core.dao.InvoiceDao;
 import com.adobe.aem.guides.wknd.core.dao.ProductDao;
+import com.adobe.aem.guides.wknd.core.exception.ClientDoesNotExistException;
 import com.adobe.aem.guides.wknd.core.exception.ProductDoesNotExistException;
 import com.adobe.aem.guides.wknd.core.models.ClientModel;
 import com.adobe.aem.guides.wknd.core.models.ErroMessage;
@@ -36,6 +38,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     private InvoiceDao invoiceDao;
     @Reference
     private ProductDao productDao;
+    @Reference
+    private ClientDao clientDao;
 
     @Override
     public void getInvoice(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
@@ -79,8 +83,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                 listInvoiceConverter.forEach(invoiceModel -> {
                     try {
                         postVerify(response, gson, invoiceModel);
-                    } catch (IOException | ProductDoesNotExistException ex) {
-                        throw new RuntimeException("Error in postInvoice", ex);
+                    } catch (IOException | ProductDoesNotExistException | ClientDoesNotExistException ex) {
+                        throw new RuntimeException("Error in postInvoice."+ e.getMessage(), ex);
                     }
                 });
             }  catch (Exception e1) {
@@ -89,7 +93,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
     }
 
-    private void postVerify(SlingHttpServletResponse response, Gson gson, InvoiceModel objInvoiceConverter) throws IOException, ProductDoesNotExistException {
+    private void postVerify(SlingHttpServletResponse response, Gson gson, InvoiceModel objInvoiceConverter) throws IOException, ProductDoesNotExistException, ClientDoesNotExistException {
         if ((objInvoiceConverter.getInvoiceDate() == null) ||
                 ((objInvoiceConverter.getInvoiceItens() == null || objInvoiceConverter.getInvoiceItens().isEmpty())) ||
                 ((objInvoiceConverter.getInvoiceValue() == null || objInvoiceConverter.getInvoiceValue().equals(0))) ||
@@ -97,9 +101,15 @@ public class InvoiceServiceImpl implements InvoiceService {
             ResponseSetter.setResponse(gson.toJson("Cannot add Invoice. Provide all the required fields"), HttpServletResponse.SC_BAD_REQUEST, response,urlReturn);
 
         } else {
-            if(productDao.verifyProducts(objInvoiceConverter.getInvoiceItens())) {
-                invoiceDao.save(objInvoiceConverter);
-                ResponseSetter.setOkResponse("Invoice added successfully.\n"+ gson.toJson(objInvoiceConverter), HttpServletResponse.SC_CREATED, response);
+            if(clientDao.getClient(objInvoiceConverter.getClientId()) != null) {
+                if(productDao.verifyProducts(objInvoiceConverter.getInvoiceItens())) {
+                    invoiceDao.save(objInvoiceConverter);
+                    ResponseSetter.setOkResponse("Invoice added successfully.\n" + gson.toJson(objInvoiceConverter), HttpServletResponse.SC_CREATED, response);
+                }else {
+                    throw new ProductDoesNotExistException("Cannot add Invoice. Product does not exist.");
+                }
+            }else {
+                throw new ClientDoesNotExistException("Client does not exist");
             }
         }
     }
