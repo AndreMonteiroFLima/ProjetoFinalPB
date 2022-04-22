@@ -129,7 +129,7 @@ Payload
 	}
 
 POST 
-- Loga o usuario passado na payload
+- Loga o Usuário passado na payload
 
 	- `Parâmetros`: Nenhum.
 	
@@ -137,7 +137,7 @@ POST
 
 DELETE 
 
-- Desloga o usuario atual se houver algum logado
+- Desloga o Usuário atual se houver algum logado
 
 	- `Parâmetros`: Nenhum.
 
@@ -146,7 +146,7 @@ DELETE
 ##
 
 ## AdminService
-#### Login Necessario 
+#### Login Necessário 
 
 	
 	------------------------------------------
@@ -161,14 +161,14 @@ Payload
 	}
 
 POST 
-- Adiciona um novo Usuario ao sistema.
+- Adiciona um novo Usuário ao sistema.
 
 	- `Parâmetros`: Nenhum.
 	
-	- `Payload`: usuario e senha em formato Json no corpo da requisição com exceção id.
+	- `Payload`: usuário e senha em formato Json no corpo da requisição com exceção id.
 
 GET
-- Recupera a lista de Usuarios cadastrados no sistema (Sem Senha).
+- Recupera a lista de Usuários cadastrados no sistema (Sem Senha).
 	- `Parâmetros`: 
 		- Opcional 
 			- userId='id'.
@@ -176,14 +176,14 @@ GET
 	- `Payload`: Nenhum.
 
 DELETE 
-- Deleta um usuario.
+- Deleta um Usuário.
 
 	- `Parâmetros`: Obrigatório - userId='id'.
 
 	- `Payload`: Nenhum.
 
 PUT
-- Atualiza um usuario escolhido.
+- Atualiza um Usuário escolhido.
 	- `Parâmetros`: Nenhum.
 
 	- `Payload`: Todos os campos.
@@ -214,7 +214,7 @@ GET
 - Recupera a lista de categorias.
 	-  `Parâmetros`: 
 		-  Opcional 
-			- cateogryId='id'.
+			- categoryId='id'.
 	
 	- `Payload`: Nenhum.
 
@@ -264,7 +264,7 @@ POST
 	- `Payload`: Todos os campos em formato Json no corpo da requisição com exceção id.
 
 GET
-- Recupera a lista de produtos.
+- Recupera a lista de Produtos.
 	- `Parâmetros`: 
 		- Opcionais:
 			- productId='id' - Recupera um único produto. (único)
@@ -275,7 +275,7 @@ GET
 	- `Payload`: Nenhum.
 
 DELETE 
-- Deleta um produto.
+- Deleta um Produto.
 
 	- `Parâmetros`: 
 		- Obrigatório 
@@ -285,7 +285,7 @@ DELETE
 	- `Payload`: Nenhum.
 
 PUT
-- Atualiza um produto escolhido.
+- Atualiza um Produto escolhido.
 	- `Parâmetros`: Nenhum.
 
 	- `Payload`: Todos os campos.
