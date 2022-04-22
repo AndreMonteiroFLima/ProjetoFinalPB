@@ -45,12 +45,11 @@ public class LoginServiceImpl implements LoginService {
 
     private void loginVerify(SlingHttpServletResponse response, Gson gson, UserModel objUserConverter) throws IOException {
         if ((objUserConverter.getUsername() == null || objUserConverter.getUsername().isEmpty()) || (objUserConverter.getPassword() == null || objUserConverter.getPassword().isEmpty())) {
-            ResponseSetter.setResponse("Name is required", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
+            ResponseSetter.setResponse("Provide all the required fields.", HttpServletResponse.SC_BAD_REQUEST, response, urlReturn);
         } else {
             UserModel user = loginDao.isValidUser(objUserConverter);
             if (user != null) {
-                String JwtToken = JwtEmulator.generateJwt(user.getUsername(), "localhost:4502");
-                Cookie cookie = new Cookie("JWT", JwtToken);
+                Cookie cookie = new Cookie("LoggedUser", "true");
                 cookie.setMaxAge(900);
                 response.addCookie(cookie);
                 ResponseSetter.setOkResponse(gson.toJson("You now are logged"), HttpServletResponse.SC_OK, response);
@@ -66,9 +65,10 @@ public class LoginServiceImpl implements LoginService {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
 
-        if(request.getCookies() != null) {
-            request.getCookie("JWT").setMaxAge(0);
-            ResponseSetter.setOkResponse("You are now logged out", HttpServletResponse.SC_OK, response);
+        if(request.getCookie("LoggedUser") != null) {
+            request.getCookie("LoggedUser").setMaxAge(0);
+            response.addCookie(request.getCookie("LoggedUser"));
+            ResponseSetter.setOkResponse(new Gson().toJson("You are now logged out"), HttpServletResponse.SC_OK, response);
         }
         else{
             ResponseSetter.setResponse("You are not logged", HttpServletResponse.SC_NOT_FOUND, response, urlReturn);

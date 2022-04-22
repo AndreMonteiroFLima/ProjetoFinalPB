@@ -4,7 +4,7 @@
   <property name="sling.servlet.methods" type="String">POST
 GET
 DELETE</property>
-  <property name="sling.servlet.paths" type="String" value="/bin/keepalive/adminServlet"/>
+  <property name="sling.servlet.paths" type="String" value="/bin/keepalive/adminService"/>
   <property name="sling.servlet.extensions" type="String">txt
 json</property>
   <service>

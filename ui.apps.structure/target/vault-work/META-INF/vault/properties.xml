@@ -4,7 +4,7 @@
 <comment>WKND Sites Project - Repository Structure Package</comment>
 <entry key="cloudManagerTarget">none</entry>
 <entry key="allowIndexDefinitions">false</entry>
-<entry key="created">2022-04-21T04:57:35.772Z</entry>
+<entry key="created">2022-04-22T21:18:55.773Z</entry>
 <entry key="groupId">com.adobe.aem.guides</entry>
 <entry key="name">aem-guides-wknd.ui.apps.structure</entry>
 <entry key="description">Empty package that defines the structure of the Adobe Experience Manager repository the Code packages in this project deploy into.

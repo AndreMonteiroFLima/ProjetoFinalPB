@@ -28,7 +28,7 @@ import static org.apache.sling.api.servlets.ServletResolverConstants.SLING_SERVL
         SLING_SERVLET_METHODS + "=" + "POST",
         SLING_SERVLET_METHODS + "=" + "GET",
         SLING_SERVLET_METHODS + "=" + "DELETE",
-        SLING_SERVLET_PATHS + "=" + "/bin/keepalive/adminServlet",
+        SLING_SERVLET_PATHS + "=" + "/bin/keepalive/adminService",
         SLING_SERVLET_EXTENSIONS + "=" + "txt", SLING_SERVLET_EXTENSIONS + "=" + "json"})
 
 @ServiceDescription("Admin Service All")

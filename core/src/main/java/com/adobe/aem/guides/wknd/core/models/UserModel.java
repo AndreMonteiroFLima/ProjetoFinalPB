@@ -1,9 +1,14 @@
 package com.adobe.aem.guides.wknd.core.models;
 
+import com.google.gson.annotations.Expose;
+
 public class UserModel {
 
+    @Expose
     private int id;
+    @Expose
     private String username;
+    @Expose(serialize = false)
     private String password;
 
     public UserModel() {
@@ -39,3 +44,12 @@ public class UserModel {
         this.password = password;
     }
 }
+/*
+###Script###
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+  );
+*/

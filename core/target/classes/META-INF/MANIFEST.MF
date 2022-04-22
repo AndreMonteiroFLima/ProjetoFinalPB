@@ -15,62 +15,62 @@ Export-Package: com.adobe.aem.guides.wknd.core.filters;version="1.0";u
  ets;version="1.0";uses:="javax.servlet,org.apache.sling.api,org.apach
  e.sling.api.servlets"
 Import-Package: javax.annotation;version="0.0.0",com.adobe.aem.guides.
- wknd.core.filters;version="[1.0,2)",com.adobe.aem.guides.wknd.core.li
- steners;version="[1.0,2)",com.adobe.aem.guides.wknd.core.models;versi
- on="[1.0,2)",com.adobe.aem.guides.wknd.core.schedulers;version="[1.0,
- 2)",com.day.commons.datasource.poolservice;version="[1.1,2)",com.day.
- cq.wcm.api;version="[1.29,2)",com.google.gson;version="[2.8,3)",com.g
- oogle.gson.reflect;version="[2.8,3)",javax.servlet;version="[3.0,4)",
- javax.servlet.http;version="[3.0,4)",javax.sql,org.apache.commons.cod
- ec.digest;version="[1.15,2)",org.apache.commons.io;version="[2.11,3)"
- ,org.apache.commons.lang3;version="[3.12,4)",org.apache.sling.api;ver
- sion="[2.3,3)",org.apache.sling.api.request;version="[2.5,3)",org.apa
- che.sling.api.resource;version="[2.13,3)",org.apache.sling.api.resour
- ce.observation;version="[1.2,2)",org.apache.sling.api.servlets;versio
- n="[2.3,3)",org.apache.sling.models.annotations;version="[1.5,2)",org
- .apache.sling.models.annotations.injectorspecific;version="[1.1,2)",o
- rg.slf4j;version="[1.7,2)"
+ wknd.core.listeners;version="[1.0,2)",com.adobe.aem.guides.wknd.core.
+ models;version="[1.0,2)",com.adobe.aem.guides.wknd.core.schedulers;ve
+ rsion="[1.0,2)",com.day.commons.datasource.poolservice;version="[1.1,
+ 2)",com.day.cq.wcm.api;version="[1.29,2)",com.google.gson;version="[2
+ .8,3)",com.google.gson.annotations;version="[2.8,3)",com.google.gson.
+ reflect;version="[2.8,3)",javax.servlet;version="[3.0,4)",javax.servl
+ et.http;version="[3.0,4)",javax.sql,org.apache.commons.codec.digest;v
+ ersion="[1.15,2)",org.apache.commons.io;version="[2.11,3)",org.apache
+ .commons.lang3;version="[3.12,4)",org.apache.sling.api;version="[2.3,
+ 3)",org.apache.sling.api.request;version="[2.5,3)",org.apache.sling.a
+ pi.resource;version="[2.13,3)",org.apache.sling.api.resource.observat
+ ion;version="[1.2,2)",org.apache.sling.api.servlets;version="[2.3,3)"
+ ,org.apache.sling.models.annotations;version="[1.5,2)",org.apache.sli
+ ng.models.annotations.injectorspecific;version="[1.1,2)",org.slf4j;ve
+ rsion="[1.7,2)"
 Private-Package: com.adobe.aem.guides.wknd.core.auth,com.adobe.aem.gui
  des.wknd.core.dao,com.adobe.aem.guides.wknd.core.dao.Impl,com.adobe.a
  em.guides.wknd.core.exception,com.adobe.aem.guides.wknd.core.service,
  com.adobe.aem.guides.wknd.core.service.impl,com.adobe.aem.guides.wknd
  .core.utils
 Provide-Capability: osgi.service;objectClass:List<String>="com.adobe.a
- em.guides.wknd.core.dao.CategoryDao";uses:="com.adobe.aem.guides.wknd
- .core.dao",osgi.service;objectClass:List<String>="com.adobe.aem.guide
- s.wknd.core.dao.ClientDao";uses:="com.adobe.aem.guides.wknd.core.dao"
- ,osgi.service;objectClass:List<String>="com.adobe.aem.guides.wknd.cor
- e.dao.Impl.AdminDaoImpl";uses:="com.adobe.aem.guides.wknd.core.dao.Im
- pl",osgi.service;objectClass:List<String>="com.adobe.aem.guides.wknd.
- core.dao.InvoiceDao";uses:="com.adobe.aem.guides.wknd.core.dao",osgi.
- service;objectClass:List<String>="com.adobe.aem.guides.wknd.core.dao.
- LoginDao";uses:="com.adobe.aem.guides.wknd.core.dao",osgi.service;obj
- ectClass:List<String>="com.adobe.aem.guides.wknd.core.dao.ProductDao"
- ;uses:="com.adobe.aem.guides.wknd.core.dao",osgi.service;objectClass:
- List<String>="com.adobe.aem.guides.wknd.core.dao.ReportDao";uses:="co
- m.adobe.aem.guides.wknd.core.dao",osgi.service;objectClass:List<Strin
- g>="com.adobe.aem.guides.wknd.core.service.AdminService";uses:="com.a
+ em.guides.wknd.core.dao.AdminDao";uses:="com.adobe.aem.guides.wknd.co
+ re.dao",osgi.service;objectClass:List<String>="com.adobe.aem.guides.w
+ knd.core.dao.CategoryDao";uses:="com.adobe.aem.guides.wknd.core.dao",
+ osgi.service;objectClass:List<String>="com.adobe.aem.guides.wknd.core
+ .dao.ClientDao";uses:="com.adobe.aem.guides.wknd.core.dao",osgi.servi
+ ce;objectClass:List<String>="com.adobe.aem.guides.wknd.core.dao.Invoi
+ ceDao";uses:="com.adobe.aem.guides.wknd.core.dao",osgi.service;object
+ Class:List<String>="com.adobe.aem.guides.wknd.core.dao.LoginDao";uses
+ :="com.adobe.aem.guides.wknd.core.dao",osgi.service;objectClass:List<
+ String>="com.adobe.aem.guides.wknd.core.dao.ProductDao";uses:="com.ad
+ obe.aem.guides.wknd.core.dao",osgi.service;objectClass:List<String>="
+ com.adobe.aem.guides.wknd.core.dao.ReportDao";uses:="com.adobe.aem.gu
+ ides.wknd.core.dao",osgi.service;objectClass:List<String>="com.adobe.
+ aem.guides.wknd.core.service.AdminService";uses:="com.adobe.aem.guide
+ s.wknd.core.service",osgi.service;objectClass:List<String>="com.adobe
+ .aem.guides.wknd.core.service.CategoryService";uses:="com.adobe.aem.g
+ uides.wknd.core.service",osgi.service;objectClass:List<String>="com.a
+ dobe.aem.guides.wknd.core.service.ClientService";uses:="com.adobe.aem
+ .guides.wknd.core.service",osgi.service;objectClass:List<String>="com
+ .adobe.aem.guides.wknd.core.service.DatabaseService";uses:="com.adobe
+ .aem.guides.wknd.core.service",osgi.service;objectClass:List<String>=
+ "com.adobe.aem.guides.wknd.core.service.InvoiceService";uses:="com.ad
+ obe.aem.guides.wknd.core.service",osgi.service;objectClass:List<Strin
+ g>="com.adobe.aem.guides.wknd.core.service.LoginService";uses:="com.a
  dobe.aem.guides.wknd.core.service",osgi.service;objectClass:List<Stri
- ng>="com.adobe.aem.guides.wknd.core.service.CategoryService";uses:="c
- om.adobe.aem.guides.wknd.core.service",osgi.service;objectClass:List<
- String>="com.adobe.aem.guides.wknd.core.service.ClientService";uses:=
- "com.adobe.aem.guides.wknd.core.service",osgi.service;objectClass:Lis
- t<String>="com.adobe.aem.guides.wknd.core.service.DatabaseService";us
- es:="com.adobe.aem.guides.wknd.core.service",osgi.service;objectClass
- :List<String>="com.adobe.aem.guides.wknd.core.service.InvoiceService"
- ;uses:="com.adobe.aem.guides.wknd.core.service",osgi.service;objectCl
- ass:List<String>="com.adobe.aem.guides.wknd.core.service.LoginService
- ";uses:="com.adobe.aem.guides.wknd.core.service",osgi.service;objectC
- lass:List<String>="com.adobe.aem.guides.wknd.core.service.ProductServ
- ice";uses:="com.adobe.aem.guides.wknd.core.service",osgi.service;obje
- ctClass:List<String>="com.adobe.aem.guides.wknd.core.service.ReportSe
- rvice";uses:="com.adobe.aem.guides.wknd.core.service",osgi.service;ob
- jectClass:List<String>="java.lang.Runnable",osgi.service;objectClass:
- List<String>="javax.servlet.Filter";uses:="javax.servlet",osgi.servic
- e;objectClass:List<String>="javax.servlet.Servlet";uses:="javax.servl
- et",osgi.service;objectClass:List<String>="org.apache.sling.api.resou
- rce.observation.ResourceChangeListener";uses:="org.apache.sling.api.r
- esource.observation"
+ ng>="com.adobe.aem.guides.wknd.core.service.ProductService";uses:="co
+ m.adobe.aem.guides.wknd.core.service",osgi.service;objectClass:List<S
+ tring>="com.adobe.aem.guides.wknd.core.service.ReportService";uses:="
+ com.adobe.aem.guides.wknd.core.service",osgi.service;objectClass:List
+ <String>="java.lang.Runnable",osgi.service;objectClass:List<String>="
+ javax.servlet.Filter";uses:="javax.servlet",osgi.service;objectClass:
+ List<String>="javax.servlet.Servlet";uses:="javax.servlet",osgi.servi
+ ce;objectClass:List<String>="org.apache.sling.api.resource.observatio
+ n.ResourceChangeListener";uses:="org.apache.sling.api.resource.observ
+ ation"
 Require-Capability: osgi.service;filter:="(objectClass=com.adobe.aem.g
  uides.wknd.core.dao.AdminDao)";effective:=active,osgi.service;filter:
  ="(objectClass=com.adobe.aem.guides.wknd.core.dao.CategoryDao)";effec
@@ -105,27 +105,28 @@ Service-Component: OSGI-INF/com.adobe.aem.guides.wknd.core.dao.Impl.Ad
  DaoImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.dao.Impl.LoginDao
  Impl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.dao.Impl.ProductDaoI
  mpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.dao.Impl.ReportDaoImp
- l.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.filters.LoggingFilter.x
- ml,OSGI-INF/com.adobe.aem.guides.wknd.core.filters.ParamFilter.xml,OS
- GI-INF/com.adobe.aem.guides.wknd.core.listeners.SimpleResourceListene
- r.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.schedulers.SimpleSchedu
- ledTask.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.service.impl.Admi
- nServletImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.service.impl
- .CategoryServiceImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.serv
- ice.impl.ClientServiceImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.cor
- e.service.impl.DatabaseServiceImpl.xml,OSGI-INF/com.adobe.aem.guides.
- wknd.core.service.impl.InvoiceServiceImpl.xml,OSGI-INF/com.adobe.aem.
- guides.wknd.core.service.impl.LoginServiceImpl.xml,OSGI-INF/com.adobe
- .aem.guides.wknd.core.service.impl.ProductServiceImpl.xml,OSGI-INF/co
- m.adobe.aem.guides.wknd.core.service.impl.ReportServiceImp.xml,OSGI-I
- NF/com.adobe.aem.guides.wknd.core.servlets.AdminServlet.xml,OSGI-INF/
- com.adobe.aem.guides.wknd.core.servlets.CategoryServlet.xml,OSGI-INF/
- com.adobe.aem.guides.wknd.core.servlets.ClientServlet.xml,OSGI-INF/co
- m.adobe.aem.guides.wknd.core.servlets.InvoiceServlet.xml,OSGI-INF/com
- .adobe.aem.guides.wknd.core.servlets.LoginServlet.xml,OSGI-INF/com.ad
- obe.aem.guides.wknd.core.servlets.ProductServlet.xml,OSGI-INF/com.ado
- be.aem.guides.wknd.core.servlets.ReportServlet.xml,OSGI-INF/com.adobe
- .aem.guides.wknd.core.servlets.SimpleServlet.xml
+ l.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.filters.AuthFilter.xml,
+ OSGI-INF/com.adobe.aem.guides.wknd.core.filters.LoggingFilter.xml,OSG
+ I-INF/com.adobe.aem.guides.wknd.core.filters.ParamFilter.xml,OSGI-INF
+ /com.adobe.aem.guides.wknd.core.listeners.SimpleResourceListener.xml,
+ OSGI-INF/com.adobe.aem.guides.wknd.core.schedulers.SimpleScheduledTas
+ k.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.service.impl.AdminServl
+ etImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.service.impl.Categ
+ oryServiceImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.service.im
+ pl.ClientServiceImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.serv
+ ice.impl.DatabaseServiceImpl.xml,OSGI-INF/com.adobe.aem.guides.wknd.c
+ ore.service.impl.InvoiceServiceImpl.xml,OSGI-INF/com.adobe.aem.guides
+ .wknd.core.service.impl.LoginServiceImpl.xml,OSGI-INF/com.adobe.aem.g
+ uides.wknd.core.service.impl.ProductServiceImpl.xml,OSGI-INF/com.adob
+ e.aem.guides.wknd.core.service.impl.ReportServiceImp.xml,OSGI-INF/com
+ .adobe.aem.guides.wknd.core.servlets.AdminServlet.xml,OSGI-INF/com.ad
+ obe.aem.guides.wknd.core.servlets.CategoryServlet.xml,OSGI-INF/com.ad
+ obe.aem.guides.wknd.core.servlets.ClientServlet.xml,OSGI-INF/com.adob
+ e.aem.guides.wknd.core.servlets.InvoiceServlet.xml,OSGI-INF/com.adobe
+ .aem.guides.wknd.core.servlets.LoginServlet.xml,OSGI-INF/com.adobe.ae
+ m.guides.wknd.core.servlets.ProductServlet.xml,OSGI-INF/com.adobe.aem
+ .guides.wknd.core.servlets.ReportServlet.xml,OSGI-INF/com.adobe.aem.g
+ uides.wknd.core.servlets.SimpleServlet.xml
 Sling-Model-Classes: com.adobe.aem.guides.wknd.core.models.HelloWorldM
  odel
 
